@@ -46,7 +46,7 @@ export default function NewItem() {
           onBlur={() => setNameTouched(true)}
           required
           className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            name === "" && nameTouched ? "border-red-500" : "border-gray-300"
+            name === "" && nameTouched ? "border-2 border-red-500" : "border-gray-300"
           }`}
           placeholder="Enter item name"
         />
