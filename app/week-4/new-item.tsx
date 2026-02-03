@@ -46,7 +46,9 @@ export default function NewItem() {
           onBlur={() => setNameTouched(true)}
           required
           className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            name === "" && nameTouched ? "border-2 border-red-500" : "border-gray-300"
+            name === "" && nameTouched
+              ? "border-2 border-red-500"
+              : "border-gray-300"
           }`}
           placeholder="Enter item name"
         />
@@ -103,7 +105,7 @@ export default function NewItem() {
 
       <button
         type="submit"
-        disabled={!name || name.length < 2}
+        disabled={!name}
         className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 ease-in-out disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400"
       >
         Add Item
