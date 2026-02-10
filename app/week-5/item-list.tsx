@@ -4,10 +4,18 @@ import Item from "./item";
 import { useState, useMemo } from "react";
 import items from "./items.json";
 
+type DisplayMode =
+  | { mode: "list"; sorted: typeof items }
+  | {
+      mode: "group";
+      grouped: Record<string, typeof items>;
+      sortedCats: string[];
+    };
+
 const ItemList: React.FC = () => {
   const [sortBy, setSortBy] = useState("name");
 
-  const display = useMemo(() => {
+  const display = useMemo((): DisplayMode => {
     if (sortBy === "group") {
       const grouped = items.reduce(
         (acc: Record<string, typeof items>, item) => {
