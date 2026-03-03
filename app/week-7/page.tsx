@@ -16,7 +16,14 @@ const Page: React.FC = () => {
   };
 
   const handleItemSelect = (mealName: string) => {
-    const cleanedName = mealName.split(",")[0].trim().toLowerCase();
+    let cleanedName =
+      mealName.indexOf(",") !== -1
+        ? mealName.split(",")[0].trim().toLowerCase()
+        : mealName
+            .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "")
+            .trim()
+            .toLowerCase();
+    cleanedName = cleanedName === "bananas" ? "banana" : cleanedName;
     setSelectedItemName(cleanedName);
   };
 
