@@ -1,15 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ItemList from "./item-list";
 import NewItem from "./new-item";
 import MealIdeas from "./meal-ideas";
 import itemsData from "./items.json";
 import { ItemData } from "../../types/item";
+import { useUserAuth } from "../_utils/auth-context";
+import { useRouter } from "next/navigation";
 
 const Page: React.FC = () => {
+  const { user } = useUserAuth();
+  const router = useRouter();
   const [items, setItems] = useState(itemsData);
   const [selectedItemName, setSelectedItemName] = useState("");
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/week-8");
+    }
+  }, [user, router]);
 
   const handleClick = (item: ItemData) => {
     setItems([...items, item]);
@@ -27,7 +37,7 @@ const Page: React.FC = () => {
     setSelectedItemName(cleanedName);
   };
 
-  return (
+  return user ? (
     <main className="min-h-screen bg-gray-50 py-8 px-4">
       <h1 className="text-center text-4xl font-bold text-gray-800 mb-8">
         Shopping List
@@ -46,7 +56,7 @@ const Page: React.FC = () => {
         )}
       </div>
     </main>
-  );
+  ) : null;
 };
 
 export default Page;
