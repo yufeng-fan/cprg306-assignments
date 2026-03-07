@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { MealData } from "../types/meal";
+import { MealData } from "../../types/meal";
 
 type Props = {
   ingredient: string;

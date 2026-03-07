@@ -5,7 +5,7 @@ import ItemList from "./item-list";
 import NewItem from "./new-item";
 import MealIdeas from "./meal-ideas";
 import itemsData from "./items.json";
-import { ItemData } from "../types/item";
+import { ItemData } from "../../types/item";
 
 const Page: React.FC = () => {
   const [items, setItems] = useState(itemsData);

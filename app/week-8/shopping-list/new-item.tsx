@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { ItemData } from "../types/item";
-import { generateRandomString } from "../lib/random";
+import { ItemData } from "../../types/item";
+import { generateRandomString } from "../../lib/random";
 
 export default function NewItem({
   onAddItem,

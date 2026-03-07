@@ -2,7 +2,7 @@
 import React from "react";
 import Item from "./item";
 import { useState, useMemo } from "react";
-import { ItemData } from "../types/item";
+import { ItemData } from "../../types/item";
 
 type Props = {
   items: ItemData[];
