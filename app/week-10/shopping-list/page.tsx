@@ -4,25 +4,36 @@ import React, { useState, useEffect } from "react";
 import ItemList from "./item-list";
 import NewItem from "./new-item";
 import MealIdeas from "./meal-ideas";
-import itemsData from "./items.json";
 import { ItemData } from "../../types/item";
+import { getItems, addItem } from "../_services/shopping-list-service";
 import { useUserAuth } from "../_utils/auth-context";
 import { useRouter } from "next/navigation";
 
 const Page: React.FC = () => {
   const { user } = useUserAuth();
   const router = useRouter();
-  const [items, setItems] = useState(itemsData);
+  const [items, setItems] = useState<ItemData[]>([]);
   const [selectedItemName, setSelectedItemName] = useState("");
+
+  const loadItems = async () => {
+    if (user) {
+      const userItems = await getItems(user.uid);
+      setItems(userItems);
+    }
+  };
 
   useEffect(() => {
     if (!user) {
       router.push("/week-8");
     }
+    loadItems();
   }, [user, router]);
 
-  const handleClick = (item: ItemData) => {
-    setItems([...items, item]);
+  const handleAddItem = async (item: ItemData) => {
+    if (!user) return;
+    const id = await addItem(user.uid, item);
+    const newItem = { ...item, id };
+    setItems([...items, newItem]);
   };
 
   const handleItemSelect = (mealName: string) => {
@@ -44,7 +55,7 @@ const Page: React.FC = () => {
       </h1>
       <div className="max-w-2xl mx-auto" style={{ display: "flex" }}>
         <div style={{ flex: 1, padding: "0 1rem" }}>
-          <NewItem onAddItem={handleClick} />
+          <NewItem onAddItem={handleAddItem} />
           <br />
           <ItemList items={items} onItemSelect={handleItemSelect} />
         </div>
