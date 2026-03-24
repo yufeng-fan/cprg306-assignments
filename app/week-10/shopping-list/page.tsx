@@ -24,7 +24,7 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     if (!user) {
-      router.push("/week-8");
+      router.push("/week-10");
     }
     loadItems();
   }, [user, router]);
